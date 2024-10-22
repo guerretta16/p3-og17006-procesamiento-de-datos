@@ -1,0 +1,938 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/21/2024 9:50:50 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PCEDUARDO"
+  DTS:CreatorName="PCEDUARDO\Eduardo"
+  DTS:DTSID="{E81D4A0D-9C71-4360-B5CD-51EDAACD42AD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="DimAerolinea"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{42232069-121C-495B-BEC1-89937A046F7A}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Conexion a DW .NET]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{2532F27F-1025-408C-9B78-5FBB8F169E6F}"
+      DTS:ObjectName="Conexion a DW .NET">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron_DW;Integrated Security=True;Encrypt=False;Application Name=SSIS-DimAerolinea-{2532F27F-1025-408C-9B78-5FBB8F169E6F}localhost.P3_OG17006_Gamatron_DW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Conexion a DW OLE DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{517E227D-0060-4EBE-A2C6-D73C99DF7D92}"
+      DTS:ObjectName="Conexion a DW OLE DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimAerolinea-{517E227D-0060-4EBE-A2C6-D73C99DF7D92}localhost.P3_OG17006_Gamatron1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Conexion DB de negocio]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{66417ED3-5781-4C4B-9B94-9655610800AF}"
+      DTS:ObjectName="Conexion DB de negocio">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron;Integrated Security=True;Encrypt=False;Application Name=SSIS-DimAerolinea-{66417ED3-5781-4C4B-9B94-9655610800AF}localhost.P3_OG17006_Gamatron;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\LLenado de Dimension de Aerolinea"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8A1F1DD1-279C-4DAA-9AEC-E66DA8A3BBAB}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="LLenado de Dimension de Aerolinea"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Actualizar Aerolineas"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC ActualizarAerolinea ?,?,?;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexion a DW OLE DB]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexion a DW OLE DB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].Columns[AerolineaKey]"
+                      cachedDataType="i4"
+                      cachedName="AerolineaKey"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@AerolineaKey]"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Match Output].Columns[AerolineaKey]" />
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].Columns[CodigoAerolinea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CodigoAerolinea"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@CodigoAerolinea]"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]" />
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].Columns[NombreAerolinea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NombreAerolinea"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@NombreAerolinea]"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[NombreAerolinea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@AerolineaKey]"
+                      dataType="i4"
+                      name="@AerolineaKey">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@CodigoAerolinea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="@CodigoAerolinea">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input].ExternalColumns[@NombreAerolinea]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="@NombreAerolinea">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LLenado de Dimension de Aerolinea\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input].Columns[Code]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Code"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Code]" />
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Description"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Description]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]"
+                      name="CodigoAerolinea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Code]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[NombreAerolinea]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[NombreAerolinea]"
+                      name="NombreAerolinea"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Description]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Insertar nuevas Aerolineas"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimAerolinea"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexion a DW .NET]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexion a DW .NET]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].Columns[CodigoAerolinea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CodigoAerolinea"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CodigoAerolinea]"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]" />
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].Columns[NombreAerolinea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NombreAerolinea"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreAerolinea]"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[NombreAerolinea]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[AerolineaKey]"
+                      dataType="i4"
+                      name="AerolineaKey" />
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[CodigoAerolinea]"
+                      dataType="wstr"
+                      length="50"
+                      name="CodigoAerolinea" />
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreAerolinea]"
+                      dataType="wstr"
+                      length="255"
+                      name="NombreAerolinea" />
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[FechaDeActualizacion]"
+                      dataType="dbTimeStamp"
+                      name="FechaDeActualizacion" />
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET].ExternalColumns[Activo]"
+                      dataType="bool"
+                      name="Activo" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Obtener datos de Aerolineas"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Airlines"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexion DB de negocio]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexion DB de negocio]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].ExternalColumns[Code]"
+                      length="10"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].ExternalColumns[Description]"
+                      length="100"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="10"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="100"
+                      name="Description" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[Code]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[Code]"
+                      name="Code" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[Description]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Verificar Existencia"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from dbo.DimAerolinea where Activo = 1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from dbo.DimAerolinea where Activo = 1) [refTable]
+where [refTable].[CodigoAerolinea] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AerolineaKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CodigoAerolinea" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="NombreAerolinea" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="FechaDeActualizacion" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Activo" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexion a DW OLE DB]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexion a DW OLE DB]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input].Columns[CodigoAerolinea]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="CodigoAerolinea"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output].Columns[CodigoAerolinea]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CodigoAerolinea</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Match Output].Columns[AerolineaKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Match Output].Columns[AerolineaKey]"
+                      name="AerolineaKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AerolineaKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\LLenado de Dimension de Aerolinea.Paths[Data Conversion Output]"
+              endId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\LLenado de Dimension de Aerolinea.Paths[Lookup Match Output]"
+              endId="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas.Inputs[OLE DB Command Input]"
+              name="Lookup Match Output"
+              startId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\LLenado de Dimension de Aerolinea.Paths[Lookup No Match Output]"
+              endId="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas.Inputs[Entrada de destino de ADO NET]"
+              name="Lookup No Match Output"
+              startId="Package\LLenado de Dimension de Aerolinea\Verificar Existencia.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\LLenado de Dimension de Aerolinea.Paths[Salida de origen de ADO NET]"
+              endId="Package\LLenado de Dimension de Aerolinea\Data Conversion.Inputs[Data Conversion Input]"
+              name="Salida de origen de ADO NET"
+              startId="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="257,42"
+          Id="Package\LLenado de Dimension de Aerolinea"
+          TopLeft="318,270" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\LLenado de Dimension de Aerolinea">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="219,42"
+          Id="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas"
+          TopLeft="455,95" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\LLenado de Dimension de Aerolinea\Verificar Existencia"
+          TopLeft="477,269" />
+        <NodeLayout
+          Size="161,42"
+          Id="Package\LLenado de Dimension de Aerolinea\Data Conversion"
+          TopLeft="481,182" />
+        <EdgeLayout
+          Id="Package\LLenado de Dimension de Aerolinea.Paths[Salida de origen de ADO NET]"
+          TopLeft="563,137">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\LLenado de Dimension de Aerolinea.Paths[Data Conversion Output]"
+          TopLeft="562.5,224">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="210,42"
+          Id="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas"
+          TopLeft="155,433" />
+        <EdgeLayout
+          Id="Package\LLenado de Dimension de Aerolinea.Paths[Lookup No Match Output]"
+          TopLeft="536,311">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-276,122"
+              Start="0,0"
+              End="-276,114.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.4707903780069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,45.4707903780069"
+                    Point2="0,49.4707903780069"
+                    Point3="-4,49.4707903780069" />
+                  <mssgle:LineSegment
+                    End="-272,49.4707903780069" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-272,49.4707903780069"
+                    Point2="-276,49.4707903780069"
+                    Point3="-276,53.4707903780069" />
+                  <mssgle:LineSegment
+                    End="-276,114.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-193.80638671875,54.4707903780069,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="182,42"
+          Id="Package\LLenado de Dimension de Aerolinea\Actualizar Aerolineas"
+          TopLeft="717,444" />
+        <EdgeLayout
+          Id="Package\LLenado de Dimension de Aerolinea.Paths[Lookup Match Output]"
+          TopLeft="591,311">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="217,133"
+              Start="0,0"
+              End="217,125.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.9312714776632" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.9312714776632"
+                    Point2="0,53.9312714776632"
+                    Point3="4,53.9312714776632" />
+                  <mssgle:LineSegment
+                    End="213,53.9312714776632" />
+                  <mssgle:CubicBezierSegment
+                    Point1="213,53.9312714776632"
+                    Point2="217,53.9312714776632"
+                    Point3="217,57.9312714776632" />
+                  <mssgle:LineSegment
+                    End="217,125.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="60.30861328125,58.9312714776632,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\LLenado de Dimension de Aerolinea\Obtener datos de Aerolineas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LLenado de Dimension de Aerolinea\Verificar Existencia">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\LLenado de Dimension de Aerolinea\Insertar nuevas Aerolineas">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
