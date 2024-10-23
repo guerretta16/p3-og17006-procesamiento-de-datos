@@ -1,0 +1,1270 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/22/2024 5:31:32 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="PCEDUARDO"
+  DTS:CreatorName="PCEDUARDO\Eduardo"
+  DTS:DTSID="{550E8B15-08B2-4DC4-A90D-A8F80A9332D6}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5556.0"
+  DTS:LocaleID="2058"
+  DTS:ObjectName="DimAeropuerto"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{A6ACED5C-7CF9-4876-86DF-11C881C49A5B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gamatron .Net]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{4E52A5FB-D0A7-443A-AEB2-042366C664E2}"
+      DTS:ObjectName="Gamatron .Net">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron;Integrated Security=True;Encrypt=False;Application Name=SSIS-DimAeropuerto-{4E52A5FB-D0A7-443A-AEB2-042366C664E2}localhost.P3_OG17006_Gamatron;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gamatron .Net DW]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{01E375CD-1C5F-40FD-82EF-FFED74E13993}"
+      DTS:ObjectName="Gamatron .Net DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron_DW;Integrated Security=True;Encrypt=False;Application Name=SSIS-DimAeropuerto-{01E375CD-1C5F-40FD-82EF-FFED74E13993}localhost.P3_OG17006_Gamatron_DW;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gamatron OLE DB DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{03246CEA-E6EC-4B11-B95D-A0E1C8B2BD36}"
+      DTS:ObjectName="Gamatron OLE DB DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=P3_OG17006_Gamatron_DW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-DimAeropuerto-{03246CEA-E6EC-4B11-B95D-A0E1C8B2BD36}localhost.P3_OG17006_Gamatron1;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Llenado de Dimension Aeropuerto"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{982DFBA0-E483-4EC2-960A-E55D72614E9F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Llenado de Dimension Aeropuerto"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Actualizar Aeropuertos"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC ActualizarAeropuerto ?,?,?,?,?,?;</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gamatron OLE DB DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gamatron OLE DB DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[AeropuertoKey]"
+                      cachedDataType="i4"
+                      cachedName="AeropuertoKey"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@AeropuertoKey]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Match Output].Columns[AeropuertoKey]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[NombreCiudad]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NombreCiudad"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@NombreCiudad]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreCiudad]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[AbreviaturaEstado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="AbreviaturaEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@AbreviaturaEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AbreviaturaEstado]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[FipsEstado]"
+                      cachedDataType="i4"
+                      cachedName="FipsEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@FipsEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[FipsEstado]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[NombreEstado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NombreEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@NombreEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreEstado]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].Columns[CodigoAreaMundial]"
+                      cachedDataType="i4"
+                      cachedName="CodigoAreaMundial"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@CodigoAreaMundial]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[CodigoAreaMundial]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@AeropuertoKey]"
+                      dataType="i4"
+                      name="@AeropuertoKey">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@NombreCiudad]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="@NombreCiudad">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@AbreviaturaEstado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="@AbreviaturaEstado">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@FipsEstado]"
+                      dataType="i4"
+                      name="@FipsEstado">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@NombreEstado]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="@NombreEstado">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input].ExternalColumns[@CodigoAreaMundial]"
+                      dataType="i4"
+                      name="@CodigoAreaMundial">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;4"
+              description="Consume datos de SQL Server, OLE DB, ODBC u Oracle mediante el correspondiente proveedor de datos de .NET Framework. Se usa una instrucción Transact-SQL para definir el conjunto de resultados. Por ejemplo, se extraen datos de SQL Server con el proveedor de datos de .NET Framework para SQL Server."
+              name="Consultar Datos de Aeropuertos"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica la instrucción SQL utilizada por el componente para extraer datos."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica si se debe permitir que columnas externas que no sean de cadenas se conviertan implícitamente en cadenas en las columnas de salida."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de origen."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."Airports"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especificar el modo de recuperar información de columnas externas"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">0</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gamatron .Net]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gamatron .Net]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET]"
+                  name="Salida de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[AirportID]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]"
+                      name="AirportID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[CityName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[CityName]"
+                      length="100"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[CityName]"
+                      name="CityName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[State]"
+                      length="10"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateFips]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[StateFips]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateFips]"
+                      name="StateFips"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[StateName]"
+                      length="50"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateName]"
+                      name="StateName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[Wac]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversión"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[Wac]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[Wac]"
+                      name="Wac"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[AirportID]"
+                      dataType="i4"
+                      name="AirportID" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[CityName]"
+                      dataType="wstr"
+                      length="100"
+                      name="CityName" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="10"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[StateFips]"
+                      dataType="i4"
+                      name="StateFips" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[StateName]"
+                      dataType="wstr"
+                      length="50"
+                      name="StateName" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].ExternalColumns[Wac]"
+                      dataType="i4"
+                      name="Wac" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET]"
+                  isErrorOut="true"
+                  name="Salida de error de origen de ADO NET">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[AirportID]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[AirportID]"
+                      name="AirportID" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[CityName]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[CityName]"
+                      name="CityName" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[State]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[StateFips]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[StateFips]"
+                      name="StateFips" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[StateName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[StateName]"
+                      name="StateName" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[Wac]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[Wac]"
+                      name="Wac" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de error de origen de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Conversion de Tipos"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[AirportID]"
+                      cachedDataType="i4"
+                      cachedName="AirportID"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[CityName]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="CityName"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[CityName]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="State"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[StateFips]"
+                      cachedDataType="i4"
+                      cachedName="StateFips"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateFips]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[StateName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="StateName"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateName]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input].Columns[Wac]"
+                      cachedDataType="i4"
+                      cachedName="Wac"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[Wac]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AeropuertoID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AeropuertoID]"
+                      name="AeropuertoID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreCiudad]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreCiudad]"
+                      name="NombreCiudad"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[CityName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AbreviaturaEstado]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AbreviaturaEstado]"
+                      name="AbreviaturaEstado"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[State]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[FipsEstado]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[FipsEstado]"
+                      name="FipsEstado"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateFips]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreEstado]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreEstado]"
+                      name="NombreEstado"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[StateName]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[CodigoAreaMundial]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[CodigoAreaMundial]"
+                      name="CodigoAreaMundial"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[Wac]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; Todos los derechos reservados; http://www.microsoft.com/sql/support;2"
+              description="Carga datos en una base de datos compatible con ADO.NET que use una vista o tabla de base de datos. Se cargan datos en una tabla nueva o existente. Por ejemplo, se usa un proveedor ADO.NET para ODBC para cargar datos en un destino ODBC."
+              name="Insertar Nuevos Aeropuertos"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Nombre de la tabla de la base de datos de destino."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."DimAeropuerto"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifique el número de filas por lote. El valor predeterminado es 0, que utiliza el mismo tamaño que el búfer interno de SSIS. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Número de segundos antes de que se agote el tiempo de espera de un comando. Un valor de 0 indica un tiempo de espera infinito. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica si se debe usar la interfaz SqlBulkCopy para mejorar el rendimiento de las operaciones de inserción masiva. No todos los proveedores admiten esta interfaz."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gamatron .Net DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gamatron .Net DW]"
+                  description="Administrador de conexiones administrado"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET]"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de destino de ADO NET">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[AeropuertoID]"
+                      cachedDataType="i4"
+                      cachedName="AeropuertoID"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[AeropuertoId]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AeropuertoID]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[NombreCiudad]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="NombreCiudad"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreCiudad]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreCiudad]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[AbreviaturaEstado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="AbreviaturaEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[AbreviaturaEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[AbreviaturaEstado]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[NombreEstado]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="NombreEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[NombreEstado]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[CodigoAreaMundial]"
+                      cachedDataType="i4"
+                      cachedName="CodigoAreaMundial"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[CodigoAreaMundial]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[CodigoAreaMundial]" />
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].Columns[FipsEstado]"
+                      cachedDataType="i4"
+                      cachedName="FipsEstado"
+                      externalMetadataColumnId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[FipsEstado]"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output].Columns[FipsEstado]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[AeropuertoKey]"
+                      dataType="i4"
+                      name="AeropuertoKey" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[AeropuertoId]"
+                      dataType="i4"
+                      name="AeropuertoId" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreCiudad]"
+                      dataType="wstr"
+                      length="100"
+                      name="NombreCiudad" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[AbreviaturaEstado]"
+                      dataType="wstr"
+                      length="10"
+                      name="AbreviaturaEstado" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[FipsEstado]"
+                      dataType="i4"
+                      name="FipsEstado" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[NombreEstado]"
+                      dataType="wstr"
+                      length="50"
+                      name="NombreEstado" />
+                    <externalMetadataColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET].ExternalColumns[CodigoAreaMundial]"
+                      dataType="i4"
+                      name="CodigoAreaMundial" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Outputs[Salida de error de destino de ADO NET]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Salida de error de destino de ADO NET"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Outputs[Salida de error de destino de ADO NET].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Outputs[Salida de error de destino de ADO NET].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Verificar existencia de Aeropuertos"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimAeropuerto]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimAeropuerto]) [refTable]
+where [refTable].[AeropuertoId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="AeropuertoKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="AeropuertoId" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NombreCiudad" dataType="DT_STR" length="100" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="AbreviaturaEstado" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="FipsEstado" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="NombreEstado" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CodigoAreaMundial" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gamatron OLE DB DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gamatron OLE DB DW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input].Columns[AirportID]"
+                      cachedDataType="i4"
+                      cachedName="AirportID"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET].Columns[AirportID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">AeropuertoId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Match Output].Columns[AeropuertoKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Match Output].Columns[AeropuertoKey]"
+                      name="AeropuertoKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">AeropuertoKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Llenado de Dimension Aeropuerto.Paths[Data Conversion Output]"
+              endId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Llenado de Dimension Aeropuerto.Paths[Lookup Match Output]"
+              endId="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos.Inputs[OLE DB Command Input]"
+              name="Lookup Match Output"
+              startId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Llenado de Dimension Aeropuerto.Paths[Lookup No Match Output]"
+              endId="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos.Inputs[Entrada de destino de ADO NET]"
+              name="Lookup No Match Output"
+              startId="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Llenado de Dimension Aeropuerto.Paths[Salida de origen de ADO NET]"
+              endId="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos.Inputs[Data Conversion Input]"
+              name="Salida de origen de ADO NET"
+              startId="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos.Outputs[Salida de origen de ADO NET]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Vaciar Dimension Aeropuerto"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Tarea Ejecutar SQL"
+      DTS:Disabled="True"
+      DTS:DTSID="{2CCADCF1-7C9A-4EE4-A9D1-7A2EDA2FCAA9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Vaciar Dimension Aeropuerto"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{03246CEA-E6EC-4B11-B95D-A0E1C8B2BD36}"
+          SQLTask:SqlStatementSource="DELETE FROM DimAeropuerto;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Restricción]"
+      DTS:CreationName=""
+      DTS:DTSID="{3680481F-FCAA-4C8D-B38A-0F4F6CE2BFC0}"
+      DTS:From="Package\Vaciar Dimension Aeropuerto"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Restricción"
+      DTS:To="Package\Llenado de Dimension Aeropuerto" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--Esta sección CDATA contiene la información de diseño del paquete. Esta sección incluye información como, por ejemplo, las coordenadas (x,y), el ancho y el alto.-->
+<!--Si edita manualmente esta sección y comete un error, puede eliminarlo. -->
+<!--El paquete podrá cargarse normalmente, pero se perderá la información de diseño anterior y el diseñador reorganizará los elementos automáticamente en la superficie de diseño.-->
+<Objects
+  Version="8">
+  <!--Cada uno de los nodos siguientes contiene propiedades que no afectan al comportamiento en tiempo de ejecución.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="246,42"
+          Id="Package\Llenado de Dimension Aeropuerto"
+          TopLeft="330,252" />
+        <NodeLayout
+          Size="223,42"
+          Id="Package\Vaciar Dimension Aeropuerto"
+          TopLeft="283,146" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción]"
+          TopLeft="394.5,188">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="58.5,64"
+              Start="0,0"
+              End="58.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="54.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="54.5,32"
+                    Point2="58.5,32"
+                    Point3="58.5,36" />
+                  <mssgle:LineSegment
+                    End="58.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Llenado de Dimension Aeropuerto">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="236,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos"
+          TopLeft="343,93" />
+        <NodeLayout
+          Size="249,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos"
+          TopLeft="342,303" />
+        <NodeLayout
+          Size="219,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos"
+          TopLeft="190,437" />
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Lookup No Match Output]"
+          TopLeft="426.333333333333,345">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-126.833333333333,92"
+              Start="0,0"
+              End="-126.833333333333,84.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.1524341580207" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.1524341580207"
+                    Point2="0,37.1524341580207"
+                    Point3="-4,37.1524341580207" />
+                  <mssgle:LineSegment
+                    End="-122.833333333333,37.1524341580207" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-122.833333333333,37.1524341580207"
+                    Point2="-126.833333333333,37.1524341580207"
+                    Point3="-126.833333333333,41.1524341580207" />
+                  <mssgle:LineSegment
+                    End="-126.833333333333,84.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-119.223053385417,42.1524341580207,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos"
+          TopLeft="611,448" />
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Lookup Match Output]"
+          TopLeft="506.666666666667,345">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="199.333333333333,103"
+              Start="0,0"
+              End="199.333333333333,95.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5945730247406" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.5945730247406"
+                    Point2="0,41.5945730247406"
+                    Point3="4,41.5945730247406" />
+                  <mssgle:LineSegment
+                    End="195.333333333333,41.5945730247406" />
+                  <mssgle:CubicBezierSegment
+                    Point1="195.333333333333,41.5945730247406"
+                    Point2="199.333333333333,41.5945730247406"
+                    Point3="199.333333333333,45.5945730247406" />
+                  <mssgle:LineSegment
+                    End="199.333333333333,95.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="51.4752799479167,46.5945730247406,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos"
+          TopLeft="374,195" />
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Salida de origen de ADO NET]"
+          TopLeft="462.5,135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Data Conversion Output]"
+          TopLeft="465.25,237">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66"
+              Start="0,0"
+              End="0,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimAeropuerto]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

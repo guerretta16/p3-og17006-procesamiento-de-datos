@@ -1,15 +1,29 @@
-CREATE TABLE Airlines (
+CREATE TABLE Airlines
+(
     Code VARCHAR(10) PRIMARY KEY,
     Description VARCHAR(100)
 );
+GO
 
-CREATE TABLE FlightsBS (
+CREATE TABLE Airports
+(
+    AirportID INT PRIMARY KEY,
+    CityName VARCHAR(100),
+    State VARCHAR(10),
+    StateFips INT,
+    StateName VARCHAR(50),
+    Wac INT
+);
+GO
+
+CREATE TABLE Flights
+(
     FlightDate DATE,
     Airline VARCHAR(100),
-    Origin VARCHAR(100),
-    Dest VARCHAR(100),
-    Cancelled BOOLEAN,
-    Diverted BOOLEAN,
+    Origin VARCHAR(5),
+    Dest VARCHAR(5),
+    Cancelled VARCHAR(5),
+    Diverted VARCHAR(5),
     CRSDepTime INT,
     DepTime FLOAT,
     DepDelayMinutes FLOAT,
@@ -25,35 +39,25 @@ CREATE TABLE FlightsBS (
     Month INT,
     DayofMonth INT,
     DayOfWeek INT,
-    Marketing_Airline_Network VARCHAR(100),
-    Operated_or_Branded_Code_Share_Partners VARCHAR(100),
+    Marketing_Airline_Network VARCHAR(10),
+    Operated_or_Branded_Code_Share_Partners VARCHAR(20),
     DOT_ID_Marketing_Airline INT,
-    IATA_Code_Marketing_Airline VARCHAR(100),
+    IATA_Code_Marketing_Airline VARCHAR(10),
     Flight_Number_Marketing_Airline INT,
-    Operating_Airline VARCHAR(255) FOREIGN KEY REFERENCES Airlines(Code),
+    Operating_Airline VARCHAR(10) FOREIGN KEY REFERENCES Airlines(Code),
     DOT_ID_Operating_Airline INT,
-    IATA_Code_Operating_Airline VARCHAR(100),
-    Tail_Number VARCHAR(100),
+    IATA_Code_Operating_Airline VARCHAR(10),
+    Tail_Number VARCHAR(20),
     Flight_Number_Operating_Airline INT,
-    OriginAirportID INT,
+    OriginAirportID INT FOREIGN KEY REFERENCES Airports(AirportID),
     OriginAirportSeqID INT,
     OriginCityMarketID INT,
-    OriginCityName VARCHAR(100),
-    OriginState VARCHAR(100),
-    OriginStateFips INT,
-    OriginStateName VARCHAR(100),
-    OriginWac INT,
-    DestAirportID INT,
+    DestAirportID INT FOREIGN KEY REFERENCES Airports(AirportID),
     DestAirportSeqID INT,
     DestCityMarketID INT,
-    DestCityName VARCHAR(100),
-    DestState VARCHAR(100),
-    DestStateFips INT,
-    DestStateName VARCHAR(100),
-    DestWac INT,
     DepDel15 FLOAT,
     DepartureDelayGroups FLOAT,
-    DepTimeBlk VARCHAR(100),
+    DepTimeBlk VARCHAR(20),
     TaxiOut FLOAT,
     WheelsOff FLOAT,
     WheelsOn FLOAT,
@@ -62,8 +66,8 @@ CREATE TABLE FlightsBS (
     ArrDelay FLOAT,
     ArrDel15 FLOAT,
     ArrivalDelayGroups FLOAT,
-    ArrTimeBlk VARCHAR(100),
+    ArrTimeBlk VARCHAR(20),
     DistanceGroup INT,
-    DivAirportLandings INT
+    DivAirportLandings FLOAT
 );
-
+GO
