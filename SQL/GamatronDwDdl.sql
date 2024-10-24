@@ -101,3 +101,9 @@ CREATE TABLE ParametrosGlobales (
 	ValorParametro VARCHAR(255) NOT NULL
 );
 GO
+
+-- Crear parametro de Fecha (SE USA LA FECHA 2017-12-31 YA QUE LOS DATOS INICIALES PARTEN DEL 2018)
+INSERT INTO ParametrosGlobales (NombreParametro, ValorParametro) VALUES ('FechaUltimaInsercion', CONVERT(DATETIME, '2017-12-31'));
+
+-- Comando para Actualizar Parametro de Fecha
+UPDATE ParametrosGlobales SET ValorParametro = CONVERT(DATETIME, '2017-12-31') WHERE NombreParametro = 'FechaUltimaInsercion';

@@ -11,8 +11,8 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="31"
-  DTS:VersionGUID="{684C675A-013D-4724-B120-DDB48ED44684}">
+  DTS:VersionBuild="36"
+  DTS:VersionGUID="{F3A4B037-3998-4A64-8961-41B5C0AE394F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -118,8 +118,10 @@
     OriginAirportID AS AeropuertoOrigenId,
     DestAirportID AS AeropuertoDestinoId,
     FlightDate AS FechaVuelo,
-    Tail_Number AS NumeroCola,
-    Flight_Number_Operating_Airline AS NumeroVuelo,
+        CASE
+        WHEN Tail_Number != '' THEN Tail_Number
+        WHEN Tail_Number = '' THEN 'Sin Numero'
+    END AS NumeroCola,    Flight_Number_Operating_Airline AS NumeroVuelo,
     Distance AS Distancia,
     DistanceGroup AS IntervaloDistancia,
     AirTime AS TiempoDeVuelo,
@@ -230,7 +232,7 @@ where [refTable].[CodigoAerolinea] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\280:invalid};</property>
+                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\Consultar Datos de Vuelos.Outputs[Salida de origen de ADO NET].Columns[CodigoAerolinea]};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -390,7 +392,7 @@ where [refTable].[AeropuertoId] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\Consultar Datos de Vuelos.Outputs[Salida de origen de ADO NET].Columns[AeropuertoDestinoId]};</property>
+                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\113:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -548,7 +550,7 @@ where [refTable].[AeropuertoId] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\Consultar Datos de Vuelos.Outputs[Salida de origen de ADO NET].Columns[AeropuertoOrigenId]};</property>
+                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\112:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -706,7 +708,7 @@ where [refTable].[Fecha] = ?</property>
                   containsID="true"
                   dataType="System.String"
                   description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
-                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\Consultar Datos de Vuelos.Outputs[Salida de origen de ADO NET].Columns[FechaVuelo]};</property>
+                  name="ParameterMap">#{Package\Llenar Tabla de Hechos de Vuelos\114:invalid};</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
@@ -826,8 +828,10 @@ where [refTable].[Fecha] = ?</property>
     OriginAirportID AS AeropuertoOrigenId,
     DestAirportID AS AeropuertoDestinoId,
     FlightDate AS FechaVuelo,
-    Tail_Number AS NumeroCola,
-    Flight_Number_Operating_Airline AS NumeroVuelo,
+        CASE
+        WHEN Tail_Number != '' THEN Tail_Number
+        WHEN Tail_Number = '' THEN 'Sin Numero'
+    END AS NumeroCola,    Flight_Number_Operating_Airline AS NumeroVuelo,
     Distance AS Distancia,
     DistanceGroup AS IntervaloDistancia,
     AirTime AS TiempoDeVuelo,
@@ -2000,6 +2004,10 @@ FROM dbo.Flights WHERE CONVERT(DATETIME, FlightDate) &gt; CONVERT(DATETIME,'' )<
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="229,42"
+          Id="Package\Actualizar valor de Parametros"
+          TopLeft="375,489" />
+        <NodeLayout
           Size="161,42"
           Id="Package\Leer Parametros"
           TopLeft="403,206" />
@@ -2007,32 +2015,6 @@ FROM dbo.Flights WHERE CONVERT(DATETIME, FlightDate) &gt; CONVERT(DATETIME,'' )<
           Size="247,42"
           Id="Package\Llenar Tabla de Hechos de Vuelos"
           TopLeft="363,354" />
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Restricción 1]"
-          TopLeft="485,248">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,106"
-              Start="0,0"
-              End="0,98.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,98.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="229,42"
-          Id="Package\Actualizar valor de Parametros"
-          TopLeft="375,489" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Restricción]"
           TopLeft="488,396">
@@ -2047,6 +2029,28 @@ FROM dbo.Flights WHERE CONVERT(DATETIME, FlightDate) &gt; CONVERT(DATETIME,'' )<
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,85.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Restricción 1]"
+          TopLeft="485,248">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,106"
+              Start="0,0"
+              End="0,98.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,98.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2090,33 +2094,21 @@ FROM dbo.Flights WHERE CONVERT(DATETIME, FlightDate) &gt; CONVERT(DATETIME,'' )<
         <NodeLayout
           Size="210,42"
           Id="Package\Llenar Tabla de Hechos de Vuelos\Consultar Datos de Vuelos"
-          TopLeft="141,109" />
+          TopLeft="150,108" />
         <EdgeLayout
           Id="Package\Llenar Tabla de Hechos de Vuelos.Paths[Salida de origen de ADO NET]"
-          TopLeft="246,151">
+          TopLeft="255.75,150">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="10.5,66"
+              EndConnector="0,67"
               Start="0,0"
-              End="10.5,58.5">
+              End="0,59.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,29"
-                    Point2="0,33"
-                    Point3="4,33" />
-                  <mssgle:LineSegment
-                    End="6.5,33" />
-                  <mssgle:CubicBezierSegment
-                    Point1="6.5,33"
-                    Point2="10.5,33"
-                    Point3="10.5,37" />
-                  <mssgle:LineSegment
-                    End="10.5,58.5" />
+                    End="0,59.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

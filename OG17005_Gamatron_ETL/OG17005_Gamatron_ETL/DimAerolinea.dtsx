@@ -11,8 +11,8 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="DimAerolinea"
   DTS:PackageType="5"
-  DTS:VersionBuild="13"
-  DTS:VersionGUID="{81A93E64-4BA2-4847-81E0-75E280974072}">
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{3B3028C9-2785-4739-B5FF-A3BF4586B52F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>

@@ -2,23 +2,28 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>OG17005_Gamatron_ETL</Name>
-    <LastWriteTime>2024-10-23T04:41:34.0111833Z</LastWriteTime>
+    <LastWriteTime>2024-10-24T04:56:27.6859706Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>DimAerolinea.dtsx</Name>
-      <LastWriteTime>2024-10-23T05:06:12.3667551Z</LastWriteTime>
+      <LastWriteTime>2024-10-24T15:41:34.9534539Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>DimAeropuerto.dtsx</Name>
-      <LastWriteTime>2024-10-22T23:45:37.8697238Z</LastWriteTime>
+      <LastWriteTime>2024-10-24T15:41:36.7245845Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>FactVuelos.dtsx</Name>
-      <LastWriteTime>2024-10-23T07:35:43.4513167Z</LastWriteTime>
+      <LastWriteTime>2024-10-24T15:14:25.6297927Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>Full_ETL.dtsx</Name>
+      <LastWriteTime>2024-10-24T15:41:33.3831759Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

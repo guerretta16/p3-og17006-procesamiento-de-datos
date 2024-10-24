@@ -11,8 +11,8 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="DimAeropuerto"
   DTS:PackageType="5"
-  DTS:VersionBuild="6"
-  DTS:VersionGUID="{A6ACED5C-7CF9-4876-86DF-11C881C49A5B}">
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{4A35B5EB-1593-493F-9D06-6D763DFB1879}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1228,7 +1228,7 @@ where [refTable].[AeropuertoId] = ?</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos">
+    design-time-name="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1241,7 +1241,7 @@ where [refTable].[AeropuertoId] = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -1251,7 +1251,7 @@ where [refTable].[AeropuertoId] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -1259,7 +1259,7 @@ where [refTable].[AeropuertoId] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos">
+    design-time-name="Package\Llenado de Dimension Aeropuerto\Consultar Datos de Aeropuertos">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

@@ -3,7 +3,10 @@ SELECT
     OriginAirportID AS AeropuertoOrigenId,
     DestAirportID AS AeropuertoDestinoId,
     FlightDate AS FechaVuelo,
-    Tail_Number AS NumeroCola,
+    CASE
+		WHEN Tail_Number != '' THEN Tail_Number
+        WHEN Tail_Number = '' THEN 'Sin Numero'
+    END AS NumeroCola,
     Flight_Number_Operating_Airline AS NumeroVuelo,
     Distance AS Distancia,
     DistanceGroup AS IntervaloDistancia,
