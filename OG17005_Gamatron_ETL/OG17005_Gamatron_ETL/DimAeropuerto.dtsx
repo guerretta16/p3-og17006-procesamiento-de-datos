@@ -11,8 +11,8 @@
   DTS:LocaleID="2058"
   DTS:ObjectName="DimAeropuerto"
   DTS:PackageType="5"
-  DTS:VersionBuild="8"
-  DTS:VersionGUID="{4A35B5EB-1593-493F-9D06-6D763DFB1879}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{1E87EF70-5374-4032-97D7-0D241D7A46F1}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -1097,9 +1097,61 @@ where [refTable].[AeropuertoId] = ?</property>
           Id="Package\Llenado de Dimension Aeropuerto\Verificar existencia de Aeropuertos"
           TopLeft="342,303" />
         <NodeLayout
+          Size="180,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos"
+          TopLeft="374,195" />
+        <NodeLayout
           Size="219,42"
           Id="Package\Llenado de Dimension Aeropuerto\Insertar Nuevos Aeropuertos"
           TopLeft="190,437" />
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos"
+          TopLeft="611,448" />
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Data Conversion Output]"
+          TopLeft="465.25,237">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66"
+              Start="0,0"
+              End="0,58.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Llenado de Dimension Aeropuerto.Paths[Salida de origen de ADO NET]"
+          TopLeft="462.5,135">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Llenado de Dimension Aeropuerto.Paths[Lookup No Match Output]"
           TopLeft="426.333333333333,345">
@@ -1136,10 +1188,6 @@ where [refTable].[AeropuertoId] = ?</property>
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="190,42"
-          Id="Package\Llenado de Dimension Aeropuerto\Actualizar Aeropuertos"
-          TopLeft="611,448" />
         <EdgeLayout
           Id="Package\Llenado de Dimension Aeropuerto.Paths[Lookup Match Output]"
           TopLeft="506.666666666667,345">
@@ -1172,56 +1220,8 @@ where [refTable].[AeropuertoId] = ?</property>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="51.4752799479167,46.5945730247406,96.3827734375,11.609375"
+              BoundingBox="51.4752799479165,46.5945730247406,96.3827734375,11.609375"
               RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="180,42"
-          Id="Package\Llenado de Dimension Aeropuerto\Conversion de Tipos"
-          TopLeft="374,195" />
-        <EdgeLayout
-          Id="Package\Llenado de Dimension Aeropuerto.Paths[Salida de origen de ADO NET]"
-          TopLeft="462.5,135">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Llenado de Dimension Aeropuerto.Paths[Data Conversion Output]"
-          TopLeft="465.25,237">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,66"
-              Start="0,0"
-              End="0,58.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,58.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
